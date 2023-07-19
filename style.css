@@ -1,0 +1,96 @@
+/* ------------------- */
+/* Custom properties   */
+/* ------------------- */
+
+:root {
+    /* colors */
+    --clr-black: 0 0% 5%;
+    --clr-white: 0 0% 98%;
+    --clr-purple: 303 9% 52%;
+    --clr-dark-purple: 303 8% 44%;
+    --clr-darker-purple: 300 8% 17%;
+
+    /* --fg-color: hsl(var(--clr-black)); */
+    /* --bg-color: hsl(var(--clr-white)); */
+
+    /* ## Colors */
+
+    /* ### Primary */
+
+    - Bright Blue: hsl(220, 98%, 61%);
+    - Check Background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+
+    /* ### Neutral */
+
+    /* ### Light Theme */
+
+    - Very Light Gray: hsl(0, 0%, 98%);
+    - Very Light Grayish Blue: hsl(236, 33%, 92%);
+    - Light Grayish Blue: hsl(233, 11%, 84%);
+    - Dark Grayish Blue: hsl(236, 9%, 61%);
+    - Very Dark Grayish Blue: hsl(235, 19%, 35%);
+
+    /* ### Dark Theme */
+
+    - Very Dark Blue: hsl(235, 21%, 11%);
+    - Very Dark Desaturated Blue: hsl(235, 24%, 19%);
+    - Light Grayish Blue: hsl(234, 39%, 85%);
+    - Light Grayish Blue (hover): hsl(236, 33%, 92%);
+    - Dark Grayish Blue: hsl(234, 11%, 52%);
+    - Very Dark Grayish Blue: hsl(233, 14%, 35%);
+    - Very Dark Grayish Blue: hsl(237, 14%, 26%);
+}
+
+/* ------------------- */
+/* Reset               */
+/* ------------------- */
+
+/* Box-model */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+    height: 100%;
+    max-width: 100%;
+    display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Body */
+body {
+    background-color: var(--bg-color);
+    color: var(--fg-color);
+    font-family: var(--ff-pt-mono);
+    font-size: var(--fs-300);
+    line-height: 2;
+    min-height: 100vh;
+
+    --fg-color: hsl(var(--clr-black));
+    --bg-color: hsl(var(--clr-white));
+    --accent-color: hsl(var(--clr-white));
+}
+
+/* setting dark mode based on system preference */
+body.dark {
+    --clr-black: 0, 0%, 5%;
+    --clr-white: 0 0% 98%;
+
+    --fg-color: hsl(var(--clr-white));
+    --bg-color: hsl(var(--clr-black));
+    --accent-color: hsl(var(--clr-darker-purple));
+}
