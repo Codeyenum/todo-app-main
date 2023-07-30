@@ -3,42 +3,47 @@
 /* ------------------- */
 
 :root {
-    /* colors */
-    --clr-black: 0 0% 5%;
-    --clr-white: 0 0% 98%;
-    --clr-purple: 303 9% 52%;
-    --clr-dark-purple: 303 8% 44%;
-    --clr-darker-purple: 300 8% 17%;
+    /* ## Colors ## */
 
-    /* --fg-color: hsl(var(--clr-black)); */
-    /* --bg-color: hsl(var(--clr-white)); */
-
-    /* ## Colors */
-
-    /* ### Primary */
-
-    - Bright Blue: hsl(220, 98%, 61%);
-    - Check Background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
-
-    /* ### Neutral */
+    --active-state-blue: hsl(220, 98%, 61%);
 
     /* ### Light Theme */
+    --bg-color: var(--lt-v-light-gray);
 
-    - Very Light Gray: hsl(0, 0%, 98%);
-    - Very Light Grayish Blue: hsl(236, 33%, 92%);
-    - Light Grayish Blue: hsl(233, 11%, 84%);
-    - Dark Grayish Blue: hsl(236, 9%, 61%);
-    - Very Dark Grayish Blue: hsl(235, 19%, 35%);
+    /* completed item */
+    --completed-item-clr: var(--lt-light-grayish-blue);
+    --lt-light-grayish-blue: hsl(233, 11%, 84%);
+    /* item counter */
+    --lt-dark-grayish-blue: hsl(236, 9%, 61%);
+    --status-text-clr: var(--lt-dark-grayish-blue);
+    /* bg color */
+    --lt-v-light-gray: hsl(0, 0%, 98%);
+    /* outline/border color */
+    --border-clr: var(--lt-v-light-grayish-blue);
+    --lt-v-light-grayish-blue: hsl(236, 33%, 92%);
+    /* pending item */
+    --lt-v-dark-grayish-blue: hsl(235, 19%, 35%);
+    --pending-item-clr: var(--lt-v-dark-grayish-blue);
 
     /* ### Dark Theme */
+    /* --pending-item-clr: var(--dt-light-grayish-blue); */
+    --dt-light-grayish-blue: hsl(234, 39%, 85%);
 
-    - Very Dark Blue: hsl(235, 21%, 11%);
-    - Very Dark Desaturated Blue: hsl(235, 24%, 19%);
-    - Light Grayish Blue: hsl(234, 39%, 85%);
-    - Light Grayish Blue (hover): hsl(236, 33%, 92%);
-    - Dark Grayish Blue: hsl(234, 11%, 52%);
-    - Very Dark Grayish Blue: hsl(233, 14%, 35%);
-    - Very Dark Grayish Blue: hsl(237, 14%, 26%);
+    --dt-light-grayish-blue-hv: hsl(236, 33%, 92%);
+
+    --dt-dark-grayish-blue: hsl(234, 11%, 52%);
+
+    /* --bg-color: var(--dt-v-dark-blue); */
+    --dt-v-dark-blue: hsl(235, 21%, 11%);
+
+    --todo-bg-color: white;
+    --dt-v-dark-desat-blue: hsl(235, 24%, 19%);
+
+    /* outline/border color */
+    /* --completed-item-clr: var(--dt-v-dark-grayish-blue-1); */
+    --dt-v-dark-grayish-blue-1: hsl(233, 14%, 35%);
+    /* --status-text-clr: var(--dt-v-dark-grayish-blue-1); */
+    --dt-v-dark-grayish-blue-2: hsl(237, 14%, 26%);
 }
 
 /* ------------------- */
@@ -79,18 +84,262 @@ body {
     font-size: var(--fs-300);
     line-height: 2;
     min-height: 100vh;
-
-    --fg-color: hsl(var(--clr-black));
-    --bg-color: hsl(var(--clr-white));
-    --accent-color: hsl(var(--clr-white));
 }
 
 /* setting dark mode based on system preference */
-body.dark {
-    --clr-black: 0, 0%, 5%;
-    --clr-white: 0 0% 98%;
 
-    --fg-color: hsl(var(--clr-white));
-    --bg-color: hsl(var(--clr-black));
-    --accent-color: hsl(var(--clr-darker-purple));
+body.dark {
+    --bg-color: var(--dt-v-dark-blue);
+    --todo-bg-color: var(--dt-v-dark-desat-blue);
+    --pending-item-clr: var(--dt-light-grayish-blue);
+    --completed-item-clr: var(--dt-v-dark-grayish-blue-1);
+    --status-text-clr: var(--dt-v-dark-grayish-blue-1);
+    --border-clr: var(--dt-v-dark-grayish-blue-2);
+
+    background-image: url("./images/bg-desktop-dark.jpg");
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: url("./images/bg-desktop-light.jpg");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 300vw 32.5vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 0 1.5rem;
+}
+
+main {      
+    margin: 2rem auto;
+    text-align: center;
+    width: 100%;
+    max-width: 475px;
+}
+
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 0 0 1.5rem;
+    position: relative;
+}
+
+.todo-header h1 {
+    color: var(--lt-v-light-gray);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: .75rem;
+    text-transform: uppercase;
+}
+
+.todo-list,
+.create-todo {
+    background-color: var(--todo-bg-color);
+    border-radius: 5px;
+    padding: 0 1.5rem;
+    text-align: left;
+}
+
+.todo-list {
+    border-radius: 5px 5px 0 0;
+}
+
+.create-todo {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 0 1rem;
+    padding: 1rem 1.5rem;
+}
+
+.create-todo .input-box {
+    background-color: transparent;
+    border: none;    
+    caret-color: var(--active-state-blue);
+    color: var(--pending-item-clr);
+    padding: 0 .5rem;
+    flex-grow: 1;
+}
+
+.input-box:focus, .input-box:focus-visible {
+    border: none;
+    outline: none;
+}
+
+::placeholder {
+    color: var(--dt-dark-grayish-blue);
+    font-size: .85rem;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-clr);
+    font-size: .85rem;
+    margin: 0 -1.5rem;
+    padding: 1rem 1.5rem;
+}
+
+.todo-item p {
+    color: var(--pending-item-clr);
+    cursor: pointer;
+    flex-grow: 1;    
+    margin: 0.3rem 0.75rem 0;
+}
+
+.todo-item p.completed {
+    color: var(--completed-item-clr);
+    text-decoration: line-through;
+}
+
+.cross-icon {
+    cursor: pointer;    
+    width: 12.5px;
+}
+
+.custom-checkbox {
+    width: 22.5px;
+    height: 22.5px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+}
+
+.custom-checkbox input {
+    display: none;
+}
+
+.custom-checkbox .checkmark {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--border-clr);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.custom-checkbox .checkmark img {
+    display: none;
+    height: 40%;
+    margin: 30%;
+}
+
+.custom-checkbox input:checked+.checkmark {
+    border: none;
+    background: linear-gradient(to left top, hsl(280, 87%, 65%), hsl(192, 100%, 67%));
+    background-size: 100%;
+}
+
+.custom-checkbox:hover {
+    padding: 1px;
+    background: linear-gradient(to left top, hsl(280, 87%, 65%), hsl(192, 100%, 67%));
+}
+
+.custom-checkbox:hover .checkmark {
+    border: none;
+    background-color: var(--todo-bg-color);
+}
+
+.custom-checkbox input:checked+.checkmark img {
+    display: block;
+}
+
+.todo-status {
+    background-color: var(--todo-bg-color);
+    border-radius: 5px;
+    color: var(--status-text-clr);    
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: .75rem 0;
+    margin: 1rem 0 2rem;
+}
+
+.todo-status p {
+    font-weight: 700;
+}
+
+.drag-n-drop {
+    color: var(--status-text-clr); 
+    font-size: .8rem;   
+    margin: 1rem;
+}
+
+.todo-status.desktop {    
+    display: none;    
+}
+
+.counter.hide {
+    display: none;
+}
+
+.counter {
+    background-color: var(--todo-bg-color);
+    border: 0;
+    border-radius: 0 0 5px 5px;
+    margin: 0;
+}
+
+.counter p {    
+    color: var(--pending-item-clr);
+    cursor: pointer;    
+    margin: 0.3rem 0.75rem 0;
+}
+
+.todo-status p {
+    cursor: pointer;
+}
+
+.clear-all:hover, .todo-status p:hover {
+    color: var(--pending-item-clr);
+}
+
+.todo-status p.active {
+    color: var(--active-state-blue);
+}
+
+.toggle {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 22.5%;
+    transition: all 2s ease-in;
+    width: 26px;
+    height: 26px;
+}
+
+.toggle.hide {   
+    display: block;
+    transform: rotate(360deg); 
+    transition: all 0.5s ease-in;
+    width: 0px;
+}
+
+.hide {
+    display: none;
+    transition: all 0.35s ease-out;
+}
+
+@media screen and (min-width: 1020px) {
+    .todo-status {
+        background-color: var(--todo-bg-color);
+        border-radius: 5px;         
+        display: none;
+        justify-content: center;
+        gap: .5rem;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .todo-status p, .counter p {
+        color: var(--status-text-clr);   
+        font-size: 0.8rem;
+        font-weight: 400;        
+    }
+    
+    .todo-status.desktop {    
+        display: flex;    
+    }
 }

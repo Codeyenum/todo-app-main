@@ -7,12 +7,19 @@
     <!-- displays site properly based on user's device -->
 
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
     <title>Frontend Mentor | Todo app</title>
 
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
     <style>
         .attribution {
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
             font-size: 11px;
             text-align: center;
         }
@@ -24,23 +31,52 @@
 </head>
 
 <body>
-
-    Todo
-
-    <!-- Add dynamic number --> items left
-
-    All
-    Active
-    Completed
-
-    Clear Completed
-
-    Drag and drop to reorder list
-
-    <div class="attribution">
-        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
-        Coded by <a href="#">Your Name Here</a>.
-    </div>
+    <main>
+        <div class="todo-header">
+            <h1>Todo</h1>
+            <img class="dark-mode toggle hide" src="./images/icon-moon.svg" alt="">
+            <img class="light-mode toggle" src="./images/icon-sun.svg" alt="">
+        </div>
+        <form class="create-todo">
+            <label class="custom-checkbox">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </label>
+            <input class="input-box" type="text" name="" id="" placeholder="Create a new todo...">
+        </form>
+        <div class="todo-list">
+            <!-- <div class="todo-item container">
+                <label class="custom-checkbox">
+                    <input type="checkbox">
+                    <span class="checkmark">
+                        <img src="./images/icon-check.svg" alt="">
+                    </span>
+                </label>
+                <p>10 minutes meditation</p>
+                <img class="cross-icon" src="./images/icon-cross.svg" alt="">
+            </div>                      -->
+        </div>
+        <div class="counter container hide">
+            <p><span><!-- Add dynamic number --></span> items left</p>
+            <div class="todo-status desktop">
+                <p class="all-items active">All</p>
+                <p class="active-list">Active</p>
+                <p class="completed-list">Completed</p>
+            </div>
+            <p class="clear-all">Clear Completed</p>
+        </div>
+        <div class="todo-status">
+            <p class="all-items active">All</p>
+            <p class="active-list">Active</p>
+            <p class="completed-list">Completed</p>
+        </div>
+        <p class="drag-n-drop">Drag and drop to reorder list</p>
+        <div class="attribution">
+            Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+            Coded by <a href="#">Your Name Here</a>.
+        </div>
+    </main>
+    <script src="./app.js"></script>
 </body>
 
 </html>
