@@ -9,16 +9,17 @@ let statusLists = document.querySelectorAll(".todo-status p")
 let todoItems = todoList.children;
 
 form.addEventListener("submit", (e) => {
-    counter++;
-    counterContainer.children[0].firstElementChild.innerHTML = `${counter}`
     e.preventDefault();
-    createTodoElements(todoInput.value)
-    todoInput.value = "";
-
-    if (counter > 0) {
-        counterContainer.classList.remove("hide");
-    } else {
-        counterContainer.classList.add("hide");
+    if (todoInput.value != "") {
+        counter++;
+        counterContainer.children[0].firstElementChild.innerHTML = `${counter}`
+        createTodoElements(todoInput.value)
+        todoInput.value = "";
+        if (counter > 0) {
+            counterContainer.classList.remove("hide");
+        } else {
+            counterContainer.classList.add("hide");
+        }
     }
 })
 
@@ -35,12 +36,15 @@ function createTodoElements(todo) {
     let todoItem = document.createElement("div");
     let pTag = document.createElement("p");
     let crossImg = document.createElement("img");
+    // let itemCounter = 0;
 
     checkImg.src = "./images/icon-check.svg";
     spanTag.className = "checkmark";
     checkBox.type = "checkbox";
     labelTag.className = "custom-checkbox"
     todoItem.className = "todo-item container"
+    todoItem.id = "todo" + `${counter}`
+    todoItem.draggable = "true"
     pTag.innerHTML = `${todo}`
     crossImg.className = "cross-icon";
     crossImg.src = "./images/icon-cross.svg";
@@ -73,6 +77,61 @@ function createTodoElements(todo) {
             counterContainer.classList.add("hide");
         }
     })
+
+    todoItem.addEventListener('dragstart', dragStart);
+
+    let dragIndex = 0;
+    let clone = "";
+    // handle the dragstart    
+    function dragStart(e) {
+        e.dataTransfer.setData('text/plain', e.target.id);
+    }
+
+    todoItem.addEventListener('dragenter', dragEnter)
+    todoItem.addEventListener('dragover', dragOver);
+    todoItem.addEventListener('dragleave', dragLeave);
+    todoItem.addEventListener('drop', drop);
+
+    function dragEnter(e) {
+        e.preventDefault();
+        e.currentTarget.classList.add('drag-over');
+    }
+
+    function dragOver(e) {
+        e.preventDefault();
+        e.currentTarget.classList.add('drag-over');
+    }
+
+    function dragLeave(e) {
+        e.preventDefault();
+        e.currentTarget.classList.remove('drag-over');
+    }
+
+    function drop(e) {
+        e.currentTarget.classList.remove('drag-over');
+
+        e.preventDefault();
+        clone = e.currentTarget.cloneNode(true);
+        clone.addEventListener('dragstart', dragStart);
+        clone.addEventListener('dragenter', dragEnter)
+        clone.addEventListener('dragover', dragOver);
+        clone.addEventListener('dragleave', dragLeave);
+        clone.addEventListener('drop', drop);
+
+        let dragStartId = e.dataTransfer.getData("text");
+
+        if (clone.id !== dragStartId) {
+            let nodeList = e.currentTarget.parentElement.children;
+            for (let i = 0; i < nodeList.length; i++) {
+                if (nodeList[i].id === dragStartId) {
+                    dragIndex = i;
+                }
+            }
+            e.currentTarget.parentElement.insertBefore(clone, e.currentTarget.parentElement.children[dragIndex]);
+            e.currentTarget.parentElement.insertBefore(document.getElementById(dragStartId), e.currentTarget.nextSibling);
+            e.currentTarget.remove()            
+        }
+    }
 }
 
 for (let list of statusLists) {
@@ -122,14 +181,14 @@ for (let toggle of modeToggles) {
 }
 
 let clearCompleted = document.querySelector(".clear-all");
-const completedArray = [];
-clearCompleted.addEventListener("click", () => {    
-    for (let item of todoItems) {                
-        if (item.children[1].className.includes("completed")) {            
-            completedArray.push(item)
+const completedTodoItems = [];
+clearCompleted.addEventListener("click", () => {
+    for (let item of todoItems) {
+        if (item.children[1].className.includes("completed")) {
+            completedTodoItems.push(item)
         }
     }
-    for(let element of completedArray) {
-        element.remove();
+    for (let completedItem of completedTodoItems) {
+        completedItem.remove();
     }
 })
