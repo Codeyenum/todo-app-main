@@ -28,6 +28,30 @@ checkBox.addEventListener("click", () => {
     checkBox.checked = false;
 })
 
+function removeTodo(e) {
+    this.parentElement.remove();
+    counter--;
+    counterContainer.children[0].firstElementChild.innerHTML = `${counter}`
+    if (counter > 0) {
+        counterContainer.classList.remove("hide");
+    } else {
+        counterContainer.classList.add("hide");
+    }
+}
+
+function addCompletedStyle(e) {
+    if (e.target.checked == true) {
+        this.parentElement.nextElementSibling.classList.add("completed");
+        counter--;
+        counterContainer.children[0].firstElementChild.innerHTML = `${counter}`
+    }
+    if (e.target.checked == false) {
+        this.parentElement.nextElementSibling.classList.classList.remove("completed");
+        counter++;
+        counterContainer.children[0].firstElementChild.innerHTML = `${counter}`
+    }
+}
+
 function createTodoElements(todo) {
     let checkImg = document.createElement("img");
     let spanTag = document.createElement("span");
@@ -54,30 +78,8 @@ function createTodoElements(todo) {
     todoItem.append(labelTag, pTag, crossImg)
     todoList.append(todoItem);
 
-    checkBox.addEventListener("click", (e) => {
-        if (e.target.checked == true) {
-            pTag.classList.add("completed");
-            counter--;
-            counterContainer.children[0].firstElementChild.innerHTML = `${counter}`
-        }
-        if (e.target.checked == false) {
-            pTag.classList.remove("completed");
-            counter++;
-            counterContainer.children[0].firstElementChild.innerHTML = `${counter}`
-        }
-    })
-
-    crossImg.addEventListener("click", (e) => {
-        crossImg.parentElement.remove();
-        counter--;
-        counterContainer.children[0].firstElementChild.innerHTML = `${counter}`
-        if (counter > 0) {
-            counterContainer.classList.remove("hide");
-        } else {
-            counterContainer.classList.add("hide");
-        }
-    })
-
+    checkBox.addEventListener("click", addCompletedStyle)
+    crossImg.addEventListener("click", removeTodo)
     todoItem.addEventListener('dragstart', dragStart);
 
     let dragIndex = 0;
@@ -118,6 +120,8 @@ function createTodoElements(todo) {
         clone.addEventListener('dragleave', dragLeave);
         clone.addEventListener('drop', drop);
 
+        clone.children[0].children[0].addEventListener("click", addCompletedStyle);
+        clone.children[2].addEventListener("click", removeTodo)
         let dragStartId = e.dataTransfer.getData("text");
 
         if (clone.id !== dragStartId) {
@@ -129,7 +133,7 @@ function createTodoElements(todo) {
             }
             e.currentTarget.parentElement.insertBefore(clone, e.currentTarget.parentElement.children[dragIndex]);
             e.currentTarget.parentElement.insertBefore(document.getElementById(dragStartId), e.currentTarget.nextSibling);
-            e.currentTarget.remove()            
+            e.currentTarget.remove()
         }
     }
 }
@@ -184,6 +188,7 @@ let clearCompleted = document.querySelector(".clear-all");
 const completedTodoItems = [];
 clearCompleted.addEventListener("click", () => {
     for (let item of todoItems) {
+        console.log(item)
         if (item.children[1].className.includes("completed")) {
             completedTodoItems.push(item)
         }
