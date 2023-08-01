@@ -30,12 +30,21 @@ checkBox.addEventListener("click", () => {
 
 function removeTodo(e) {
     this.parentElement.remove();
-    counter--;
-    counterContainer.children[0].firstElementChild.innerHTML = `${counter}`
-    if (counter > 0) {
-        counterContainer.classList.remove("hide");
+    if (this.previousElementSibling.classList.includes("completed")) {
+        counterContainer.children[0].firstElementChild.innerHTML = `${counter}`
+        if (counter > 0) {
+            counterContainer.classList.remove("hide");
+        } else {
+            counterContainer.classList.add("hide");
+        }
     } else {
-        counterContainer.classList.add("hide");
+        counter--;
+        counterContainer.children[0].firstElementChild.innerHTML = `${counter}`
+        if (counter > 0) {
+            counterContainer.classList.remove("hide");
+        } else {
+            counterContainer.classList.add("hide");
+        }
     }
 }
 
