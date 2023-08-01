@@ -309,8 +309,7 @@ main {
     cursor: pointer;
     position: absolute;
     right: 0;
-    top: 22.5%;
-    transform: rotate(360deg); 
+    top: 22.5%;    
     transition: all 0.7s ease-in;
     width: 26px;
     height: 26px;
