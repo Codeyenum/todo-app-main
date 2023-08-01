@@ -107,6 +107,7 @@ body {
     background-size: 300vw 32.5vh;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
     font-family: 'Josefin Sans', sans-serif;
     padding: 0 1.5rem;
 }
@@ -116,7 +117,7 @@ main {
     text-align: center;
     width: 100%;
     max-width: 475px;
-    min-height: 75vh;
+    flex-grow: 1;    
 }
 
 .todo-header {
@@ -309,7 +310,7 @@ main {
     position: absolute;
     right: 0;
     top: 22.5%;
-    transition: all 2s ease-in;
+    transition: all 0.7s ease-in;
     width: 26px;
     height: 26px;
 }
@@ -329,6 +330,20 @@ main {
 .drag-over {
     border-radius: 5px;
     border: 1px solid var(--active-state-blue);
+}
+
+.attribution {
+    color: var(--pending-item-clr);
+    font-size: 11px;
+    text-align: center;
+}
+
+.attribution a {
+    color: hsl(228, 45%, 44%);
+}
+
+.attribution a:hover {
+    color: var(--active-state-blue);
 }
 
 @media screen and (min-width: 1020px) {
