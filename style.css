@@ -82,10 +82,7 @@ body {
     color: var(--fg-color);
     font-family: var(--ff-pt-mono);
     font-size: var(--fs-300);
-    line-height: 2;
-    min-height: 100vh;
-    min-height: 100svh;
-    min-height: 100dvh;
+    line-height: 2;    
 }
 
 /* setting dark mode based on system preference */
@@ -110,6 +107,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
     font-family: 'Josefin Sans', sans-serif;
     padding: 0 1.5rem;
 }
